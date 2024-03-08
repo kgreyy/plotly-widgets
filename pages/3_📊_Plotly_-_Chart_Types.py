@@ -400,21 +400,14 @@ def fetching_plotly_figures():
     d[36] = px.density_heatmap(df, x="total_bill", y="tip", histfunc="avg")
     d[37] = px.density_heatmap(df, x="total_bill", y="tip", facet_row="sex", facet_col="smoker")
     df = px.data.gapminder().query("year == 2007")
-    fig_38 = px.treemap(df, path=[px.Constant("world"), 'continent', 'country'], values='pop',
-                    color='lifeExp', color_continuous_scale='RdBu',
-                    color_continuous_midpoint=np.average(df['lifeExp'], weights=df['pop']))
-    fig_38.update_layout(margin = dict(t=50, l=25, r=25, b=25))
-    d[38] = fig_38
+    # deleted figure 38
     df = px.data.iris()
     d[39] = px.scatter(df, x="sepal_length", y="sepal_width", marginal_x="histogram", marginal_y="rug")
     d[40] = px.scatter(df, x="sepal_length", y="sepal_width", color="species", 
                     marginal_x="box", marginal_y="violin")
     df = px.data.tips()
     d[41] = px.scatter(df, x="total_bill", y="tip", color="sex", facet_col="day", marginal_x="box")
-    df = px.data.iris()
-    d[42] = px.scatter_matrix(df,
-        dimensions=["sepal_width", "sepal_length", "petal_width", "petal_length"],
-        color="species")
+    # deleted figure 38
     df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/iris-data.csv')
     index_vals = df['class'].astype('category').cat.codes
     d[43] = go.Figure(data=go.Splom(
@@ -1085,12 +1078,6 @@ for i in range(2):
 for i in range(2):
     with cols_heatmap_2[i]: st.image(f"images/charts-heatmap-{i+2}.png")
 
-st.header("Treemaps")
-with st.expander("Code & interactive graphs"):
-    st.code(code_38, language="python")
-    st.plotly_chart(d[38])
-cols_treemap = st.columns(2)
-with cols_treemap[0]: st.image("images/charts-treemap.png")
 
 st.header("Marginal plots")
 with st.expander("Code & interactive graphs"):
@@ -1103,7 +1090,7 @@ for i in range(2):
 
 st.header("Scatterplot matrix")
 with st.expander("Code & interactive graphs"):
-    for (code, fig) in zip([code_42, code_43], [d[42], d[43]]):
+    for (code, fig) in zip([code_43], [d[43]]):
         st.code(code, language="python")
         st.plotly_chart(fig)
 cols_scatterplot = st.columns(2)
